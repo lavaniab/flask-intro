@@ -18,7 +18,14 @@ AWESOMENESS = [
 def start_here():
     """Home page."""
 
-    return "<!doctype html><html>Hi! This is the home page.</html>"
+    return """
+    <!doctype html>
+    <html>
+      Hi! This is the home page.
+      <a href="http://localhost:5000/hello">
+        Hello
+      </a>
+    </html>"""
 
 
 @app.route("/hello")
@@ -35,7 +42,16 @@ def say_hello():
         <h1>Hi There!</h1>
         <form action="/greet">
           What's your name? <input type="text" name="person">
-          <input type="submit" value="Submit">
+         
+        
+        Pick a compliment.
+          <select name="compliment">
+            <option value="awesome">awesome</option>
+            <option value="terrific">terrific</option>
+            <option value="fantastic">fantastic</option>
+            <option value="neato">neato</option>
+            <option value="fantabulous">fantabulous</option>
+        <input type="submit" value="Submit">
         </form>
       </body>
     </html>
@@ -48,9 +64,7 @@ def greet_person():
 
     player = request.args.get("person")
 
-    compliment = choice(AWESOMENESS)
-
-    y = x
+    compliment = request.args.get("compliment")
 
     return """
     <!doctype html>
@@ -68,4 +82,4 @@ def greet_person():
 if __name__ == "__main__":
     # debug=True gives us error messages in the browser and also "reloads"
     # our web app if we change the code.
-    app.run(debug=False, host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0")
